@@ -65,6 +65,7 @@ with open("packages.csv", 'r', encoding="utf-8-sig") as csv_file:
                     zipcode=line['Zip'], weight=line['weight'], status='default', notes=line['Special Notes'])
         myHash.insert(int(p.pid), p)
 '''hey you can you see this update?'''
+'''Yes I can '''
 '''for i in range(len(myHash.table)):
    print("Package: {}".format(myHash.search(i + 1)))'''
 
