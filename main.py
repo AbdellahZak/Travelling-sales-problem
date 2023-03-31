@@ -42,11 +42,12 @@ class Truck:
 
 
 class Package:
-    def __init__(self, pid, address, deadline, city, zipcode, weight, status, notes):
+    def __init__(self, pid, address, deadline, city,state ,zipcode, weight, status, notes):
         self.pid = pid
         self.address = address
         self.deadline = deadline
         self.city = city
+        self.state=state
         self.zipcode = zipcode
         self.weight = weight
         self.status = status
@@ -58,18 +59,20 @@ class Package:
 
 
 with open("packages.csv", 'r', encoding="utf-8-sig") as csv_file:
-    csv_reader = csv.DictReader(csv_file)
     myHash = HashTable()
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    next(csv_reader)
     for line in csv_reader:
-        p = Package(pid=line['Package ID'], address=line['Address'], deadline=line['Deadline'], city=line['City'],
-                    zipcode=line['Zip'], weight=line['weight'], status='default', notes=line['Special Notes'])
+        p = Package(pid=line[0], address=line[1], city=line[2], state=line[3],
+                    zipcode=line[4], deadline=line[5], weight=line[6], notes=line[7], status="default")
         myHash.insert(int(p.pid), p)
-'''hey you can you see this update?'''
-'''Yes I can '''
+
 '''for i in range(len(myHash.table)):
-   print("Package: {}".format(myHash.search(i + 1)))'''
+    print("Package: {}".format(myHash.search(i + 1)))'''
 
 with open("distances.csv", 'r', encoding="utf-8-sig") as csv_file:
     csv_reader = csv.DictReader(csv_file)
+    x=csv_reader.keys()
+    print (x)
     for line in csv_reader:
         print(line)
