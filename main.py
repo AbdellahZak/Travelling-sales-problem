@@ -42,12 +42,12 @@ class Truck:
 
 
 class Package:
-    def __init__(self, pid, address, deadline, city,state ,zipcode, weight, status, notes):
+    def __init__(self, pid, address, deadline, city, state, zipcode, weight, status, notes):
         self.pid = pid
         self.address = address
         self.deadline = deadline
         self.city = city
-        self.state=state
+        self.state = state
         self.zipcode = zipcode
         self.weight = weight
         self.status = status
@@ -69,10 +69,25 @@ with open("packages.csv", 'r', encoding="utf-8-sig") as csv_file:
 
 '''for i in range(len(myHash.table)):
     print("Package: {}".format(myHash.search(i + 1)))'''
-
-with open("distances.csv", 'r', encoding="utf-8-sig") as csv_file:
-    csv_reader = csv.DictReader(csv_file)
-    x=csv_reader.keys()
-    print (x)
+with open("addresses.csv", 'r', encoding="utf-8-sig") as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    addresses = []
     for line in csv_reader:
-        print(line)
+        addresses.append(line[0])
+
+
+def measure_distance(x, y):
+    index = addresses.index(x)
+    with open("distances2.csv", 'r', encoding="utf-8-sig") as csv_file_dict:
+        csv_reader_dict = csv.DictReader(csv_file_dict)
+        line_number = 0
+        distance=105
+        for row in csv_reader_dict:
+            if line_number == index:
+                distance = row[y]
+                return distance
+            else:
+                line_number += 1
+
+
+print(measure_distance('6351 South 900 East', '2835 Main St'))
