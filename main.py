@@ -32,13 +32,23 @@ class HashTable:
 
 
 class Driver:
-    def __init__(self, intruck):
-        self.myTruck = intruck
+    def __init__(self):
+        self
+
+
+driver1 = Driver
+driver2 = Driver
 
 
 class Truck:
-    def __init__(self, packages):
+    def __init__(self, packages, driver):
         self.packages = packages
+        self.driver = driver
+
+
+truck1 = Truck
+truck2 = Truck
+Truck3 = Truck
 
 
 class Package:
@@ -81,7 +91,7 @@ def measure_distance(x, y):
     with open("distances2.csv", 'r', encoding="utf-8-sig") as csv_file_dict:
         csv_reader_dict = csv.DictReader(csv_file_dict)
         line_number = 0
-        distance=105
+        distance = 0
         for row in csv_reader_dict:
             if line_number == index:
                 distance = row[y]
@@ -90,4 +100,16 @@ def measure_distance(x, y):
                 line_number += 1
 
 
-print(measure_distance('6351 South 900 East', '2835 Main St'))
+'''def min_distance(x):
+    distance_list = []
+    for i in addresses:
+        z = measure_distance(i, x)
+        if z == "":
+            z = measure_distance(x, i)
+        else:
+            distance_list.append(z)
+            distance_list.sort()
+    return distance_list[1]'''
+
+
+print(min_distance('600 E 900 South'))
