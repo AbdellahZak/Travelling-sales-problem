@@ -1,74 +1,10 @@
 import csv
+from Package import Package
+from HashTable import HashTable
+from Truck import Truck
+import datetime
 
-
-class HashTable:
-    def __init__(self, capacity=40):
-        self.table = []
-        for i in range(capacity):
-            self.table.append([])
-
-    def insert(self, key, item):
-        slot = hash(key) % len(self.table)
-        slot_list = self.table[slot]
-
-        # update if exists
-        for keyValue in slot_list:
-            if keyValue[0] == key:
-                keyValue[1] == item
-                return True
-        # if not
-        key_value = [key, item]
-        slot_list.append(key_value)
-        return True
-
-    def search(self, key):
-        slot = hash(key) % len(self.table)
-        slot_list = self.table[slot]
-
-        for keyValue in slot_list:
-            if keyValue[0] == key:
-                return keyValue[1]  # value
-        return None
-
-
-class Driver:
-    def __init__(self):
-        self
-
-
-driver1 = Driver
-driver2 = Driver
-
-
-class Truck:
-    def __init__(self, packages, driver):
-        self.packages = packages
-        self.driver = driver
-
-
-truck1 = Truck
-truck2 = Truck
-Truck3 = Truck
-
-
-class Package:
-    def __init__(self, pid, address, deadline, city, state, zipcode, weight, status, notes):
-        self.pid = pid
-        self.address = address
-        self.deadline = deadline
-        self.city = city
-        self.state = state
-        self.zipcode = zipcode
-        self.weight = weight
-        self.status = status
-        self.notes = notes
-
-    def __str__(self):  # overwrites print(package) otherwise it will print object reference
-        return "%s, %s, %s, %s, %s, %s , %s, %s " % (
-            self.pid, self.address, self.deadline, self.city, self.zipcode, self.weight, self.status, self.notes)
-
-
-with open("packages.csv", 'r', encoding="utf-8-sig") as csv_file:
+with open("Data/packages.csv", 'r', encoding="utf-8-sig") as csv_file:
     myHash = HashTable()
     csv_reader = csv.reader(csv_file, delimiter=',')
     next(csv_reader)
@@ -77,39 +13,47 @@ with open("packages.csv", 'r', encoding="utf-8-sig") as csv_file:
                     zipcode=line[4], deadline=line[5], weight=line[6], notes=line[7], status="default")
         myHash.insert(int(p.pid), p)
 
-'''for i in range(len(myHash.table)):
-    print("Package: {}".format(myHash.search(i + 1)))'''
-with open("addresses.csv", 'r', encoding="utf-8-sig") as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    addresses = []
-    for line in csv_reader:
-        addresses.append(line[0])
+# for i in range(len(myHash.table)):
+#    print("Package: {}".format(myHash.search(i + 1)))
+
+with open("Data/Distance_File.csv") as csvfile:
+    CSV_Distance = csv.reader(csvfile)
+    CSV_Distance = list(CSV_Distance)
+
+# Read the file of address information
+with open("Data/Address_File.csv") as csvfile1:
+    CSV_Address = csv.reader(csvfile1)
+    CSV_Address = list(CSV_Address)
 
 
-def measure_distance(x, y):
-    index = addresses.index(x)
-    with open("distances2.csv", 'r', encoding="utf-8-sig") as csv_file_dict:
-        csv_reader_dict = csv.DictReader(csv_file_dict)
-        line_number = 0
-        distance = 0
-        for row in csv_reader_dict:
-            if line_number == index:
-                distance = row[y]
-                return distance
-            else:
-                line_number += 1
+# finding distance between two addresses
+def distance_between_adds(x, y):
+    distance = CSV_Distance[x][y]
+    if distance == '':
+        distance = CSV_Distance[y][x]
+
+    return float(distance)
 
 
-'''def min_distance(x):
-    distance_list = []
-    for i in addresses:
-        z = measure_distance(i, x)
-        if z == "":
-            z = measure_distance(x, i)
-        else:
-            distance_list.append(z)
-            distance_list.sort()
-    return distance_list[1]'''
+# address number from string of address
+def extract_address(address):
+    for row in CSV_Address:
+        if address in row[2]:
+            return int(row[0])
 
 
-print(min_distance('600 E 900 South'))
+# Create truck object truck1
+truck1 = Truck.Truck(16, 18, None, [1, 13, 14, 15, 16, 20, 29, 30, 31, 34, 37, 40], 0.0, "4001 South 700 East",
+                     datetime.timedelta(hours=8))
+
+# Create truck object truck2
+truck2 = Truck.Truck(16, 18, None, [3, 6, 12, 17, 18, 19, 21, 22, 23, 24, 26, 27, 35, 36, 38, 39], 0.0,
+                     "4001 South 700 East", datetime.timedelta(hours=10, minutes=20))
+
+# Create truck object truck3
+truck3 = Truck.Truck(16, 18, None, [2, 4, 5, 6, 7, 8, 9, 10, 11, 25, 28, 32, 33], 0.0, "4001 South 700 East",
+                     datetime.timedelta(hours=9, minutes=5))
+
+
+class Main:
+    print("This is the user interface")
