@@ -1,3 +1,6 @@
+# this was adapted from Cemal Tepe video on hashtable
+
+
 class HashTable:
     def __init__(self, capacity=40):
         self.table = []

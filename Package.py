@@ -9,8 +9,8 @@ class Package:
         self.weight = weight
         self.status = status
         self.notes = notes
-        self.depart_time = 0
-        self.delivery_time = 0
+        self.depart_time = None
+        self.delivery_time = None
 
     def __str__(self):  # overwrites print(package) otherwise it will print object reference
         return "%s, %s, %s, %s, %s, %s , %s, %s " % (

@@ -46,15 +46,15 @@ def extract_address(address):
 
 
 # Create truck object truck1
-truck1 = Truck.Truck(16, 18, None, [1, 13, 14, 15, 16, 20, 29, 30, 31, 34, 37, 40], 0.0, "4001 South 700 East",
+truck1 = Truck.Truck(16, 18, [1, 4, 7, 8, 13, 14, 15, 16, 29, 30, 31, 32, 34, 37, 40,  39], 0.0, "4001 South 700 East",
                      datetime.timedelta(hours=8))
 
 # Create truck object truck2
-truck2 = Truck.Truck(16, 18, None, [3, 6, 12, 17, 18, 19, 21, 22, 23, 24, 26, 27, 35, 36, 38, 39], 0.0,
+truck2 = Truck.Truck(16, 18, [3, 18, 36, 38, 6, 10, 11, 12, 17, 20, 21, 22, 23, 24, 25, 26], 0.0,
                      "4001 South 700 East", datetime.timedelta(hours=10, minutes=20))
 
 # Create truck object truck3
-truck3 = Truck.Truck(16, 18, None, [2, 4, 5, 6, 7, 8, 9, 10, 11, 25, 28, 32, 33], 0.0, "4001 South 700 East",
+truck3 = Truck.Truck(16, 18, [9, 19, 27, 28, 33, 35, 2, 5], 0.0, "4001 South 700 East",
                      datetime.timedelta(hours=9, minutes=5))
 
 
@@ -87,7 +87,7 @@ def deliver_packages(truck_object):
         # Updates the time it took for the truck to drive to the nearest package
         truck_object.time += datetime.timedelta(hours=next_address / 18)
         next_package.delivery_time = truck_object.time
-        next_package.departure_time = truck_object.depart_time
+        next_package.depart_time = truck_object.depart_time
 
 
 deliver_packages(truck1)
@@ -104,12 +104,12 @@ class Main:
         user_time = input("Please enter a time to check status of package(s). Use the following format, HH:MM  ")
         (h, m) = user_time.split(":")
         timedelta = datetime.timedelta(hours=int(h), minutes=int(m))
-        input_2 = input("To view the status of an individual package please type '1'. For all"
+        input_2 = input("To view the status of an individual package please type '1'. For all:  "
                         " packages please type 'all'.")
         if input_2 == "1":
             try:
-                solo_input = input("Enter the numeric package ID  ")
-                package = myHash.search(int(solo_input))
+                packageId = input("Enter the numeric package ID  ")
+                package = myHash.search(int(packageId))
                 package.update_status(timedelta)
                 print(str(package))
             except ValueError:
