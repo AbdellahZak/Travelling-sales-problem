@@ -16,10 +16,10 @@ class Package:
         return "%s, %s, %s, %s, %s, %s , %s, %s " % (
             self.pid, self.address, self.deadline, self.city, self.zipcode, self.weight, self.status, self.notes)
 
-    def update_status(self, timedelta):
-        if self.delivery_time < timedelta:
+    def update_status(self, current_time):
+        if self.delivery_time < current_time:
             self.status = "Delivered"
-        elif self.depart_time > timedelta:
+        elif self.depart_time > current_time:
             self.status = "En route"
         else:
             self.status = "At Hub"

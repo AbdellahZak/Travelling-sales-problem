@@ -71,6 +71,7 @@ def deliver_packages(truck_object):
         next_address = 500
         next_package = None
         for package in to_deliver:
+            # Compare addresses and finding the shortest distance
             if distance_between_adds(extract_address(truck_object.address),
                                      extract_address(package.address)) <= next_address:
                 next_address = distance_between_adds(extract_address(truck_object.address),
@@ -103,29 +104,29 @@ class Main:
         # The user will be asked to enter a specific time
         user_time = input("Please enter a time to check status of package(s). Use the following format, HH:MM  ")
         (h, m) = user_time.split(":")
-        timedelta = datetime.timedelta(hours=int(h), minutes=int(m))
+        current_time = datetime.timedelta(hours=int(h), minutes=int(m))
         input_2 = input("To view the status of an individual package please type '1'. For all:  "
                         " packages please type 'all'.")
         if input_2 == "1":
             try:
-                packageId = input("Enter the numeric package ID  ")
+                packageId = input("Enter the package ID  ")
                 package = myHash.search(int(packageId))
-                package.update_status(timedelta)
+                package.update_status(current_time)
                 print(str(package))
             except ValueError:
-                print("Entry invalid. Closing program.")
+                print("Entry not recognised. will close program.")
                 exit()
         elif input_2 == "all":
             try:
                 for packageID in range(1, 41):
                     package = myHash.search(packageID)
-                    package.update_status(timedelta)
+                    package.update_status(current_time)
                     print(str(package))
             except ValueError:
-                print("Entry invalid. Closing program.")
+                print("Entry not recognised. will close program.")
                 exit()
         else:
             exit()
     except ValueError:
-        print("Entry invalid. Closing program.")
+        print("Entry not recognised. will close program.")
         exit()
