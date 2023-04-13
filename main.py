@@ -105,10 +105,12 @@ class Main: # Time complexity O(1)
         user_time = input("Please enter a time during the travel of the route. Use the format, Hour:Minutes  ")
         (h, m) = user_time.split(":")
         current_time = datetime.timedelta(hours=int(h), minutes=int(m))
+        # user will have to choose the type of output requested individual package or all packages
         input_2 = input("To view the status of an individual package please type '1'. For all:  "
                         " packages please type 'all'.  ")
         if input_2 == "1":
             try:
+                # if single package was chosen, output individual package.
                 packageId = input("Enter the package ID  ")
                 package = myHash.search(int(packageId))
                 package.update_status(current_time)
@@ -118,7 +120,7 @@ class Main: # Time complexity O(1)
                 exit()
         elif input_2 == "all":
             try:
-                for packageID in range(1, 41):
+                for packageID in range(1, 41): # Time complexity O(n) n=40
                     package = myHash.search(packageID)
                     package.update_status(current_time)
                     print(str(package))
