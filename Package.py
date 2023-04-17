@@ -13,8 +13,8 @@ class Package:
         self.delivery_time = None
 
     def __str__(self):  # overwrites print(package) otherwise it will print object reference
-        return "%s, %s, %s, %s, %s, %s , %s, %s , %s " % (
-            self.pid, self.address, self.deadline, self.city, self.zipcode, self.weight, self.status, self.notes, self.delivery_time)
+        return "%s, %s, delivery deadline is: %s,  %s, %s, %s , %s , delivered by: %s " % (
+            self.pid, self.address, self.deadline, self.city, self.zipcode, self.weight, self.status, self.delivery_time)
 
     def update_status(self, current_time):
         if self.delivery_time < current_time:
