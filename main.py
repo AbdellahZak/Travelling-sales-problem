@@ -46,15 +46,15 @@ def extract_address(address): # Time complexity O(1)
 
 
 # Create truck object truck1
-truck1 = Truck.Truck(16, 18, [1, 4, 7, 8, 13, 14, 15, 16, 29, 30, 31, 32, 34, 37, 40, 39], 0.0, "4001 South 700 East",
+truck1 = Truck.Truck(16, 18, [1, 4, 7, 8, 13, 14, 15, 16, 20,19,29,  30, 31, 34, 37, 39], 0.0, "4001 South 700 East",
                      datetime.timedelta(hours=8))
 
 # Create truck object truck2
-truck2 = Truck.Truck(16, 18, [3, 18, 36, 38, 6, 10, 11, 12, 17, 20, 21, 22, 23, 24, 25, 26], 0.0,
+truck2 = Truck.Truck(16, 18, [3, 18, 36, 38, 10, 11, 12, 17, 21, 22, 23, 24, 26, 9], 0.0,
                      "4001 South 700 East", datetime.timedelta(hours=10, minutes=20))
 
 # Create truck object truck3
-truck3 = Truck.Truck(16, 18, [9, 19, 27, 28, 33, 35, 2, 5], 0.0, "4001 South 700 East",
+truck3 = Truck.Truck(16, 18, [40, 27, 28,33, 35, 2, 5, 6, 25,32], 0.0, "4001 South 700 East",
                      datetime.timedelta(hours=9, minutes=5))
 
 
